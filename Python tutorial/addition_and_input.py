@@ -1,5 +1,5 @@
-init_number = eval(input("Please input a number"))
-new_number = eval(input("Please input another number"))
+init_number = input("Please input a number")
+new_number = input("Please input another number")
 
 if init_number or new_number != -1:
     sum = init_number + new number
