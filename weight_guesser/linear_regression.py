@@ -19,16 +19,12 @@ Created on Tue Nov  5 19:03:36 2019
 --debounce logic/ hysteresis loop python
 """
 
-from sklearn import datasets, linear_model
 import pandas as pd
 import numpy as np 
 import seaborn as sns
 import matplotlib.pyplot as plt
-import html5lib
-from sklearn import preprocessing, svm
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression 
-from sklearn.metrics import mean_squared_error, r2_score
+
 
 #Loading in dataset from website
 wg = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weights_genders.html")
@@ -36,9 +32,8 @@ wg = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weight
 #Slicing relevant rows
 wg = wg[0]#This helped with slicing but not sure why. without this couldnt use .iloc because "list" object has no attrinute 'iloc'
 wg_final = wg.iloc[:,1:]
-print(wg_final)
 
-X = wg.iloc[:,2].values.reshape(-1,1) #why reshape
+X = wg.iloc[:,2].values.reshape(-1,1) #why reshape?
 Y = wg.iloc[:,3].values.reshape(-1,1)
 
 #Create object for the class
@@ -49,4 +44,7 @@ linear_regressor.fit(X,Y)
 
 Y_pred = linear_regressor.predict(X)
 g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=wg_final, palette =['blue','red'], line_kws={'color':'yellow'})
+sns.set()
+g.set(yscale ="log",xscale ="log", ylim=(0,400), xlim =(0,80))
+
 print(g)
