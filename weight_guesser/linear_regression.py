@@ -20,10 +20,9 @@ Created on Tue Nov  5 19:03:36 2019
 """
 
 import pandas as pd
-import numpy as np 
 import seaborn as sns
-import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression 
+from sklearn import linear_model
 
 
 #Loading in dataset from website
@@ -41,10 +40,15 @@ linear_regressor = LinearRegression()
 
 #Perform linear regression
 linear_regressor.fit(X,Y)
-
 Y_pred = linear_regressor.predict(X)
+
+#Assigns plot with variable to yellow linear regression line to variable
 g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=wg_final, palette =['blue','red'], line_kws={'color':'yellow'})
-sns.set()
-g.set(yscale ="log",xscale ="log", ylim=(0,400), xlim =(0,80))
+
+#Playing around with scale and shape of graph
+sns.set() 
+g.set(yscale ="log",xscale ="log", ylim=(0,400), xlim =(0,80)) 
 
 print(g)
+print(linear_regressor.coef_)
+print(linear_regressor.intercept_)
