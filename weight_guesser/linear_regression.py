@@ -33,21 +33,20 @@ from sklearn.metrics import mean_squared_error, r2_score
 #Loading in dataset from website
 wg = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weights_genders.html")
 
-#Use only one feature
-wg_x = wg[:, np.newaxis, 2]
+#Slicing relevant rows
+wg = wg[0]#This helped with slicing but not sure why. without this couldnt use .iloc because "list" object has no attrinute 'iloc'
+wg_final = wg.iloc[:,1:]
+print(wg_final)
 
-#Split the data into training/testing sets
-wg_X_train = wg_X[:-20]
-wg_X_test = wg_X[-20:]
+X = wg.iloc[:,2].values.reshape(-1,1) #why reshape
+Y = wg.iloc[:,3].values.reshape(-1,1)
 
-#Split the targets into training/testing sets
-wg_y_train: wg_target[:-20]
-wg_y_train: wg.target[-20:]
-# Create linear regression object
-regr = linear_model.LinearRegression()
+#Create object for the class
+linear_regressor = LinearRegression()
 
-#Train the model using the training sets
-regr.fit(wg_X_train, wg_y_train)
+#Perform linear regression
+linear_regressor.fit(X,Y)
 
-#Make predictions using the testing set
-wg_y_pred = regr.predict(wg_X_test)
+Y_pred = linear_regressor.predict(X)
+g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=wg_final, palette =['blue','red'], line_kws={'color':'yellow'})
+print(g)

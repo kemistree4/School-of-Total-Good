@@ -30,3 +30,4 @@ df.plot(kind='scatter' , x='Height' ,y='Weight')
 
 #plot using seaborn
 g =sns.scatterplot(x='Height', y='Weight', hue='Gender', data=df, palette =['blue','red'])
+print(g)
