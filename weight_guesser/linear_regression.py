@@ -19,4 +19,35 @@ Created on Tue Nov  5 19:03:36 2019
 --debounce logic/ hysteresis loop python
 """
 
-import sklearn
+from sklearn import datasets, linear_model
+import pandas as pd
+import numpy as np 
+import seaborn as sns
+import matplotlib.pyplot as plt
+import html5lib
+from sklearn import preprocessing, svm
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, r2_score
+
+#Loading in dataset from website
+wg = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weights_genders.html")
+
+#Use only one feature
+wg_x = wg[:, np.newaxis, 2]
+
+#Split the data into training/testing sets
+wg_X_train = wg_X[:-20]
+wg_X_test = wg_X[-20:]
+
+#Split the targets into training/testing sets
+wg_y_train: wg_target[:-20]
+wg_y_train: wg.target[-20:]
+# Create linear regression object
+regr = linear_model.LinearRegression()
+
+#Train the model using the training sets
+regr.fit(wg_X_train, wg_y_train)
+
+#Make predictions using the testing set
+wg_y_pred = regr.predict(wg_X_test)
