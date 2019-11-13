@@ -22,7 +22,6 @@ Created on Tue Nov  5 19:03:36 2019
 import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LinearRegression 
-from sklearn import linear_model
 
 
 #Loading in dataset from website
@@ -42,7 +41,7 @@ linear_regressor = LinearRegression()
 linear_regressor.fit(X,Y)
 Y_pred = linear_regressor.predict(X)
 
-#Assigns plot with variable to yellow linear regression line to variable
+#Assigns plot seperated by gender color with yellow linear regression line to variable
 g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=wg_final, palette =['blue','red'], line_kws={'color':'yellow'})
 
 #Playing around with scale and shape of graph
