@@ -7,9 +7,9 @@ Created on Thu Nov 28 07:36:39 2019
 """
 
 import pandas as pd
-import seaborn as sns
-from sklearn.linear_model import LinearRegression 
-
+from pandas import DataFrame
 lo = pd.read_html("https://en.wikipedia.org/wiki/Largest_organisms")
 lo = lo[0]
-print(lo)
+df = DataFrame(lo)
+
+print(df)
