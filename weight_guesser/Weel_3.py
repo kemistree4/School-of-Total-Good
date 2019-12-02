@@ -14,3 +14,5 @@ lo = pd.read_html("https://en.wikipedia.org/wiki/Largest_organisms")
 #Selecting first chart from all of them and converting to dataframe
 lo = lo[0]
 
+lo.to_csv(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3.csv')
+lo.to_html(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3.html')
