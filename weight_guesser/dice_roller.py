@@ -29,12 +29,13 @@ def generate_possibilities():
     pass
 
 import pandas as pd
-import random
 from itertools import product
 
-#Create a function that returns a random number between 1 and 6
+#Create a function that generates a list of dice possibilities and turns that list into a dataframe 
 def roll_die():
     dice = [1,2,3,4,5,6]
-    return (list(product(dice,repeat = 2))) #list of all possibilities for two six-sided dice
+    df = pd.DataFrame(list(product(dice,repeat = 2)), columns = ['Die_1', 'Die_2']) #list of all possibilities for two six-sided dice
+    df.loc[:,'Sum']= df.sum(axis=1)
+    return df
 
 print(roll_die())
