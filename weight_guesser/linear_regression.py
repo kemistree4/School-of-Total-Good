@@ -25,10 +25,10 @@ from sklearn.linear_model import LinearRegression
 
 
 #Loading in dataset from website
-wg = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weights_genders.html")
+wgs = pd.read_html("https://totalgood.org/midata/teaching/rikeem-u/heights_weights_genders.html")
 
 #Slicing relevant rows
-wg = wg[0]#This helped with slicing but not sure why. without this couldnt use .iloc because "list" object has no attrinute 'iloc'
+wg = wgs[0]#This helped with slicing but not sure why. without this couldnt use .iloc because "list" object has no attrinute 'iloc'
 wg_final = wg.iloc[:,1:]
 
 X = wg.iloc[:,2].values.reshape(-1,1) #why reshape?
@@ -42,11 +42,11 @@ linear_regressor.fit(X,Y)
 Y_pred = linear_regressor.predict(X)
 
 #Assigns plot seperated by gender color with yellow linear regression line to variable
-g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=wg_final, palette =['blue','red'], line_kws={'color':'yellow'})
+g =sns.scatterplot(x='Height', y='Weight', hue='Gender', data=wg, palette =['blue','red'])
 
 #Playing around with scale and shape of graph
 sns.set() 
-g.set(yscale ="log",xscale ="log", ylim=(0,400), xlim =(0,80)) 
+g.set(ylim=(0,300), xlim =(50,80)) 
 
 print(g)
 print(linear_regressor.coef_)
