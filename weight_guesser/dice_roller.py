@@ -36,6 +36,10 @@ def roll_die():
     dice = [1,2,3,4,5,6]
     df = pd.DataFrame(list(product(dice,repeat = 2)), columns = ['Die_1', 'Die_2']) #list of all possibilities for two six-sided dice
     df.loc[:,'Sum']= df.sum(axis=1)
+    dp = df['Sum'].value_counts(normalize=True)
+    print(dp)
     return df
 
+
 print(roll_die())
+#Ask Hobson what the difference betweeen a permutation and a product
