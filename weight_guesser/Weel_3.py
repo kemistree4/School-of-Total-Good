@@ -20,8 +20,8 @@ lo = lo[0]
 column_names = lo.columns
 print(column_names)
 
-lo.dtypes
-lo.index.values
+lo.dtypes #tells me the data type in my dataframe
+lo.index.values # tells me the index labels
 
 columns_to_drop = [column_names[i] for i in [0]] #Identifies the column I want to remove
 
