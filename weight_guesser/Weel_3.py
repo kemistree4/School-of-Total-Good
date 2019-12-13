@@ -14,9 +14,6 @@ lo = pd.read_html("https://en.wikipedia.org/wiki/Largest_organisms")
 #Selecting first chart from all of them and converting to dataframe
 lo = lo[0]
 
-#lo.to_csv(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3.csv')
-#lo.to_html(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3.html')
-
 column_names = lo.columns
 print(column_names)
 
@@ -27,3 +24,9 @@ columns_to_drop = [column_names[i] for i in [0]] #Identifies the column I want t
 
 lo.drop(columns_to_drop, inplace=True, axis=1) #Removes the rank column, it's useless for analysis
 
+lo = lo.replace("\(.*\)","", regex=True)
+lo = lo.replace("\[.*\]","", regex=True)
+
+lo.to_csv(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.csv')
+lo.to_html(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.html')
+print(lo)
