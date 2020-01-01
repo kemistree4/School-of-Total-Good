@@ -31,15 +31,22 @@ def generate_possibilities():
 import pandas as pd
 from itertools import product
 
+number = int(input('How many die(dice) would you like to roll?'))
+number_list = []
+
+for i in range(0, number): #loop that runs the number of times the user has input 
+    number_list.append("Rolled_Die_" + str(number))
+ 
 #Create a function that generates a list of dice possibilities and turns that list into a dataframe 
 def roll_die():
     dice = [1,2,3,4,5,6]
-    df = pd.DataFrame(list(product(dice,repeat = 2)), columns = ['Die_1', 'Die_2']) #list of all possibilities for two six-sided dice
+    df = pd.DataFrame(list(product(dice,repeat = number)), columns = number_list) #list of all possibilities for two six-sided dice
     df.loc[:,'Sum']= df.sum(axis=1)
     dp = df['Sum'].value_counts(normalize=True)
+    dp1 = df['Sum'].value_counts(normalize=False)
     print(dp)
+    print(dp1.plot())
     return df
-
 
 print(roll_die())
 #Ask Hobson what the difference betweeen a permutation and a product
