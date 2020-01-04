@@ -29,9 +29,9 @@ def generate_possibilities():
 import pandas as pd
 from itertools import product
 
+number = int(input('How many die(dice) would you like to roll?'))
 
-def get_num_list(n=None):
-    number = n or int(input('How many die(dice) would you like to roll?'))
+def get_num_list():
     number_list = []
     
     for i in range(0, number): #loop that runs the number of times the user has input 
@@ -39,10 +39,10 @@ def get_num_list(n=None):
     return number_list
 
 #Create a function that generates a list of dice possibilities and turns that list into a dataframe 
-def roll_die(num_dice=2):
+def roll_die():
     dice = [1,2,3,4,5,6]
-    number_list = get_num_list(num_dice)
-    df = pd.DataFrame(list(product(dice, repeat=num_dice)), columns=number_list) #list of all possibilities for two six-sided dice
+    number_list = get_num_list()
+    df = pd.DataFrame(list(product(dice, repeat=number)), columns=number_list) #list of all possibilities for two six-sided dice
     df.loc[:,'Sum']= df.sum(axis=1)
 #    dp = df['Sum'].value_counts(normalize=True)
 #    dp1 = df['Sum'].value_counts(normalize=False)
