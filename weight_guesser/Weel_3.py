@@ -30,8 +30,8 @@ lo.drop(columns_to_drop, inplace=True, axis=1) #Removes the 'Rank' column, it's 
 lo = lo.replace("\(.*\)","", regex=True) #Replaces parentheses and what they contain with nothing
 lo = lo.replace("\[.*\]","", regex=True) #Replaces square brackets and what they contain with nothing
 
-lo.to_csv(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.csv')
-lo.to_html(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.html')
+#lo.to_csv(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.csv')
+#lo.to_html(r'/home/kemistree4/code/School-of-Total-Good/weight_guesser/Week_3_cleaned.html')
 print(lo)
 
 lo1 = lo.iloc[:,:3]
