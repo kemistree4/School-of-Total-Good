@@ -69,4 +69,6 @@ def main():
 if __name__ == "__main__":
     figs = main()
     
-#Probability of rolling 5 sets of one is (1/6)^5 or 0.0001286
+"""Probability of rolling 5 sets of one is (1/6)^5 or 0.0001286 or 1 out of 7776. 
+You can see this in the final final dataframe, the first row accounts
+the only outcome with all 1's rolled. This dataframe contains 7776 rows."""

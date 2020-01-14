@@ -14,11 +14,11 @@ sns.set(color_codes=True)
 sns.set(rc={'figure.figsize':(10,10)})
 
 #import uniform distribution
-from scipy.stats import binom
+from scipy.stats import bernoulli
 
 #random numbers from uniform distribution
 
-data_binom = binom.rvs(n=10, p=0.8, size=10000)
+data_bern = bernoulli.rvs(p=0.5, size=10000)
 
-ax = sns.distplot(data_binom, kde=False, color ='skyblue', hist_kws ={'linewidth': 1, 'alpha' :1})
-ax.set(xlabel='Binomial Distribution', ylabel='Frequency')
+ax = sns.distplot(data_bern, kde=False, color ='skyblue', hist_kws ={'linewidth': 1, 'alpha' :1})
+ax.set(xlabel='Bernoulli Distribution', ylabel='Frequency')
