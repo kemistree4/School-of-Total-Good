@@ -3,11 +3,6 @@
 """
 Created on Mon Dec  2 09:49:01 2019
 ### probability/statistics
-- use a nested for loop to create all the possible pairs of dice rolls and their sum/score
-- create a dataframe with 3 columns for the 2 die rolls and the sum
-- use df.sum() and df.value_counts() to compute the probability of every possible sum (try to do this without a for loop)
-- add doctest to confirm values in dataframe --use hist -o -p and copy the entire dataframe output
-- Plot histogram of sums (5 hist for 1,2,3,4, and 5 dice)
 - Read up on central limit theorem, normal curve (Gaussian)
 - calculate z-score
 - calculate mean (.mean()) and standard deviation (.std()) of 5 dice sum
@@ -34,6 +29,8 @@ def generate_possibilities():
 import pandas as pd
 from itertools import product
 from matplotlib import pyplot as plt
+import statistics
+from scipy import stats
 #number = int(input('How many die(dice) would you like to roll?'))
 
 def get_num_list(number):
@@ -63,8 +60,13 @@ def main():
         plt.savefig(f"dice{i}.jpg")
         figs.append(fig)
         plt.clf()
-    return figs
+        if number == 5:
+            print("Standard deviation is",statistics.stdev(df['Sum']))
+            print("Mean is",statistics.mean(df['Sum']))
+            print("z-score is",stats.zscore(df['Sum']))
         
+    return figs
 if __name__ == "__main__":
     figs = main()
     
+#Probability of rolling 5 sets of one is (1/6)^5 or 0.0001286
