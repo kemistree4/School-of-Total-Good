@@ -57,7 +57,7 @@ def main():
         df = roll_die(number)
         print(df)
         fig = df['Sum'].hist(bins=6 * (i + 1) - 1) 
-        plt.savefig(f"dice{i}.jpg")
+        plt.savefig(f"dice{i + 1}.jpg")
         figs.append(fig)
         plt.clf()
         if number == 5:
