@@ -61,9 +61,9 @@ def main():
         figs.append(fig)
         plt.clf()
         if number == 5:
-            print("Standard deviation is",statistics.stdev(df['Sum']))
-            print("Mean is",statistics.mean(df['Sum']))
-            print("z-score is",stats.zscore(df['Sum']))
+            print("Standard deviation:",statistics.stdev(df['Sum']))
+            print("Mean:",statistics.mean(df['Sum']))
+            print("z-score:",stats.zscore(df['Sum']))
         
     return figs
 if __name__ == "__main__":
