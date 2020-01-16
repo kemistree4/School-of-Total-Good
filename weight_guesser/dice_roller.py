@@ -7,7 +7,8 @@ Created on Mon Dec  2 09:49:01 2019
 - calculate z-score
 - calculate mean (.mean()) and standard deviation (.std()) of 5 dice sum
 - what's the probability of the five dice rolling a value of 5 (five ones)
- 
+- fish mass measurement camera has an accuracy of 1 lb std dev (zscore = 1). How likely for 
+measurement of fish more than a 1 lb off of truth? Use cdf to figure out range of both sides of bell curve. (confidence interval)
 >>> type(generate_possibilities())
 DataFrame
 >>> generate_possibilites().shape
@@ -60,11 +61,9 @@ def main():
         plt.savefig(f"dice{i}.jpg")
         figs.append(fig)
         plt.clf()
-        if number == 5:
-            print("Standard deviation is",statistics.stdev(df['Sum']))
-            print("Mean is",statistics.mean(df['Sum']))
-            print("z-score is",stats.zscore(df['Sum']))
-        
+    print("Standard deviation is",statistics.stdev(df['Sum']))
+    print("Mean is",statistics.mean(df['Sum']))
+    print("z-score is",stats.zscore(df['Sum']))
     return figs
 if __name__ == "__main__":
     figs = main()
