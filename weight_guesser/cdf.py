@@ -6,5 +6,9 @@ Created on Wed Jan 15 20:24:56 2020
 @author: kemistree4
 """
 
-from scipy.stats import norm
-norm.cdf(-3.27326835)
+import numpy as np
+
+randomNums = np.random.normal(scale=3, size= 10000)
+Fish_mass = np.round(randomNums)
+
+print(Fish_mass)
