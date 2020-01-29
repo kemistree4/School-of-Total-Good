@@ -46,8 +46,6 @@ def roll_die(number):
         number_list = get_num_list(number)
         df = pd.DataFrame(list(product(dice, repeat= number)), columns=number_list) #list of all possibilities for two six-sided dice
         df['Sum'] = df.sum(axis=1)
-        #dp = df['Sum'].value_counts(normalize=True)
-        #df_1 = df['Sum'].value_counts(normalize=False)
     return df
         
 def main():
@@ -56,16 +54,16 @@ def main():
         number = i + 1
         df = roll_die(number)
         print(df)
-        fig = df['Sum'].hist(bins=6 * (i + 1) - 1) 
+        fig = df['Sum'].hist(bins=6 * (i + 1) * 2) 
         plt.savefig(f"dice{i + 1}.jpg")
         figs.append(fig)
         plt.clf()
         if number == 5:
             print("Standard deviation:",statistics.stdev(df['Sum']))
             print("Mean:",statistics.mean(df['Sum']))
-            print("z-score:",stats.zscore(df['Sum']))
-        
+            print("z-score:",stats.zscore(df['Sum']))     
     return figs
+
 if __name__ == "__main__":
     figs = main()
     
