@@ -3,11 +3,8 @@
 """
 Created on Mon Dec  2 09:49:01 2019
 ### probability/statistics
-- Read up on central limit theorem, normal curve (Gaussian)
-- calculate z-score
-- calculate mean (.mean()) and standard deviation (.std()) of 5 dice sum
-- what's the probability of the five dice rolling a value of 5 (five ones)
- 
+- fish mass measurement camera has an accuracy of 1 lb std dev (zscore = 1). How likely for 
+measurement of fish more than a 1 lb off of truth? Use cdf to figure out range of both sides of bell curve. (confidence interval)
 >>> type(generate_possibilities())
 DataFrame
 >>> generate_possibilites().shape
@@ -31,7 +28,6 @@ from itertools import product
 from matplotlib import pyplot as plt
 import statistics
 from scipy import stats
-#number = int(input('How many die(dice) would you like to roll?'))
 
 def get_num_list(number):
     number_list = []
@@ -62,11 +58,10 @@ def main():
             print("Standard deviation:",statistics.stdev(df['Sum']))
             print("Mean:",statistics.mean(df['Sum']))
             print("z-score:",stats.zscore(df['Sum']))     
+    print("Standard deviation is",statistics.stdev(df['Sum']))
+    print("Mean is",statistics.mean(df['Sum']))
+    print("z-score is",stats.zscore(df['Sum']))
     return figs
 
 if __name__ == "__main__":
     figs = main()
-    
-"""Probability of rolling 5 sets of one is (1/6)^5 or 0.0001286 or 1 out of 7776. 
-You can see this in the final final dataframe, the first row accounts
-the only outcome with all 1's rolled. This dataframe contains 7776 rows."""
