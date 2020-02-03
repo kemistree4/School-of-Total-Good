@@ -22,12 +22,21 @@
 
 import pandas as pd
 import seaborn as sns
+import numpy as np
+from sklearn.linear_model import LinearRegression
 
-df = pd.read_csv('C:/Users/Rikeem/code/School-of-Total-Good/weight_guesser/01_heights_weights_genders.csv')
+df = pd.read_csv('C:/code/School-of-Total-Good/weight_guesser/01_heights_weights_genders.csv')
 
-#plot using pandas
-df.plot(kind='scatter' , x='Height' ,y='Weight')
 
 #plot using seaborn
-g =sns.scatterplot(x='Height', y='Weight', hue='Gender', data=df, palette =['blue','red'])
+g =sns.lmplot(x='Height', y='Weight', hue='Gender', data=df, palette =['blue','red'])
 print(g)
+
+X = df.loc['Height']
+Y = df.loc['Weight']
+
+linear_regressor = LinearRegression()
+
+linear_regressor.fit(X,Y)
+Y_pred = linear_regressor.predict(X)
+print(Y_pred)
