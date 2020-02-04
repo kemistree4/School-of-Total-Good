@@ -49,7 +49,7 @@ print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
 def main():
-    gender = input("What is your gender (male or female)?")
+    gender = (input("What is your gender (male or female)?"))
     given_height = float(input('What is your height in inches?'))
     if gender == "male":
         predicted_weight = regressor.intercept_ + regressor.coef_[0] * given_height + (regressor.coef_[1] * 1)
@@ -57,6 +57,8 @@ def main():
     elif gender == "female":
         predicted_weight = regressor.intercept_ + regressor.coef_[0] * given_height + (regressor.coef_[1] * 0)
         print("I guess that your weight is: " + str(predicted_weight) + " lbs!")
-
+    elif gender != "male" or "female":
+        print("Please enter valid gender. Make sure letters are all lowercase") 
+        
 if __name__ == "__main__":
     main()
