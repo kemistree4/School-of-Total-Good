@@ -1,7 +1,7 @@
 
 import pandas as pd  
 import numpy as np  
-#import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt  
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
@@ -25,12 +25,12 @@ print(regressor.coef_) #Prints the slope of the regression line
 
 y_pred = regressor.predict(X_test)
 
-#df = pd.DataFrame({'Actual': y_test.flatten(), 'Predicted': y_pred.flatten()})
-#df1 = df.head(25)
-#df1.plot(kind='bar',figsize=(16,10))
-#plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
-#plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
-#plt.show()
+df = pd.DataFrame({'Actual': y_test.flatten(), 'Predicted': y_pred.flatten()})
+df1 = df.head(25)
+df1.plot(kind='bar',figsize=(16,10))
+plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
+plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+plt.show()
 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))  
 print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))  
