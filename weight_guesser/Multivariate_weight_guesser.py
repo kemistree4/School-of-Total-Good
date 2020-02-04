@@ -13,6 +13,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import seaborn as sns
+import statsmodels.formula.api as smf
+from mpl_toolkits.mplot3d import Axes3D
 
 #Import data and assign to dataframe
 df = pd.read_csv('/home/kemistree4/code/School-of-Total-Good/weight_guesser/01_heights_weights_genders.csv')
@@ -35,14 +37,32 @@ print(regressor.coef_) #Prints the slope of the regression line
 
 y_pred = regressor.predict(X_test)
 
-#Plot with seaborn
+#Plot 2D with seaborn
 sns.set()
-
 # Plot weight as a function of height
 g = sns.lmplot(x="Height", y="Weight", hue="Gender_Male", line_kws={'color': 'red'}, markers =["o", "x"], height=5, data=df_gender)
-
 # Use more informative axis labels than are provided by default
 g.set_axis_labels("Height (in)", "Weight (lbs)")
+
+#Plot 3D with matplotlib
+model = smf.ols(formula='Gender_Male ~ Height + Weight', data=df_gender)
+results_formula = model.fit()
+results_formula.params
+x_surf, y_surf = np.meshgrid(np.linspace(df_gender.Height.min(), df_gender.Height.max(), 100),np.linspace(df_gender.Weight.min(), df_gender.Weight.max(), 100))
+onlyX = pd.DataFrame({'Height': x_surf.ravel(), 'Weight': y_surf.ravel()})
+fittedY=results_formula.predict(exog=onlyX)
+
+# convert the predicted result in an array
+fittedY=np.array(fittedY)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(df_gender['Height'],df_gender['Weight'],df_gender['Gender_Male'],c='red', marker='o', alpha=0.5)
+ax.plot_surface(x_surf,y_surf,fittedY.reshape(x_surf.shape), color='b', alpha=0.3)
+ax.set_xlabel('Height')
+ax.set_ylabel('Weight')
+ax.set_zlabel('Gender')
+plt.show()
 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))  
 print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))  
