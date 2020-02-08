@@ -79,10 +79,10 @@ def main():
     given_height = float(input('What is your height in inches?'))
     if gender == "male":
         predicted_weight = regressor.intercept_ + regressor.coef_[0,0] * given_height + (regressor.coef_[0,1] * 1)
-        print("I guess that your weight is: " + str(predicted_weight) + " lbs!")
+        print("I guess that your weight is: " + str(predicted_weight[0]) + " lbs!")
     elif gender == "female":
         predicted_weight = regressor.intercept_ + regressor.coef_[0,0] * given_height + (regressor.coef_[0,1] * 0)
-        print("I guess that your weight is: " + str(predicted_weight) + " lbs!")
+        print("I guess that your weight is: " + str(predicted_weight[0]) + " lbs!")
     elif gender != "male" or "female":
         print("Please enter valid gender. Make sure letters are all lowercase") 
         
