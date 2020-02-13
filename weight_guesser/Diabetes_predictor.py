@@ -5,7 +5,8 @@ Created on Wed Feb  5 21:32:48 2020
 
 @author: kemistree4
 """
-
+#Read through slide notes
+#Bayes' rule 
 """Predict the severity of diabetes for a set of patients
 -"Severity" will be one of columns (target variable)
 -Regression (Linear and then Ridge/Lasso/SGD)"""
@@ -15,8 +16,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
-from sklearn.linear_model import RidgeCV
-from sklearn.linear_model import LassoCV
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
 from sklearn.linear_model import SGDRegressor
 
 df = pd.read_csv('https://www4.stat.ncsu.edu/~boos/var.select/diabetes.rwrite1.txt', sep=' ')
@@ -39,7 +40,7 @@ y_test_pred = regressor.predict(X_test)
 y_train_pred = regressor.predict(X_train)
 
 ###Ridge Regression###
-rr = RidgeCV()
+rr = Ridge(max_iter=10000)
 
 rr.fit(X_train, y_train) 
 
@@ -48,7 +49,7 @@ pred_train_rr= rr.predict(X_train)
 pred_test_rr= rr.predict(X_test)
 
 ###Lasso###
-model_lasso = LassoCV(max_iter = 10000)
+model_lasso = Lasso(max_iter = 10000)
 
 model_lasso.fit(X_train, y_train) 
 
@@ -57,7 +58,7 @@ pred_train_lasso= model_lasso.predict(X_train)
 pred_test_lasso= model_lasso.predict(X_test)
 
 ###SGD###
-model_SGD = SGDRegressor(max_iter=10000)
+model_SGD = SGDRegressor(max_iter=100000, penalty='elasticnet')
 
 model_SGD.fit(X_train, y_train)
 
@@ -65,27 +66,42 @@ pred_train_SGD = model_SGD.predict(X_train)
 
 pred_test_SGD = model_SGD.predict(X_test)
 
+print("\n")
 print("Linear Regression Test Set")
 print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_test_pred))  
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_test_pred)))
+
+print("\n")
 print("Linear Regression Train Set") 
 print('Mean Squared Error:', metrics.mean_squared_error(y_train, y_train_pred))  
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_train, y_train_pred)))
+
+print("\n")
 print('Ridge Training Set')
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_train,pred_train_rr)))
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_train, pred_train_rr))
+
+print("\n")
 print('Ridge Test Set')
 print('Root Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_test,pred_test_rr))) 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, pred_test_rr))
+
+print("\n")
 print("Lasso Training Set")
 print('Root Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_train,pred_train_lasso)))
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_train, pred_train_lasso))
+
+print("\n")
 print('Lasso Test Set')
 print('Root Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_test,pred_test_lasso))) 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, pred_test_lasso))
+
+print("\n")
 print('SGD Training Set')
 print('Root Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_train,pred_train_SGD))) 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_train, pred_train_SGD))
+
+print("\n")
 print('SGD Linear Regression Test Set')
 print('Root Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_test,pred_test_SGD))) 
 print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, pred_test_SGD))
