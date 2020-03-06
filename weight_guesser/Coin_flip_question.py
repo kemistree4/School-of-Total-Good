@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Feb 21 13:07:03 2020
-
 @author: kemistree4
 """
 
@@ -25,19 +23,19 @@ def coin_flip(number):
     for i in range(number):
         coin = [0,1]
         number_list = coin_number(number)
-        df = pd.DataFrame(list(product(coin, repeat= number)), columns=number_list) 
+        df = pd.DataFrame(list(product(coin, repeat= number)), columns=number_list) #creates a dataframe containing the cartesian product of the coin flip
         df_csv= df.to_csv(header=None, index=False).strip('\n').split('\n') # Converts the dataframe to a list of strings
         
     tplt_count = 0
     df_length = len(df_csv)
     
     for i in df_csv: #iterates through the list
-        if '1,1,1' in i:
-            tplt_count = tplt_count + 1
+        if '1,1,1' in i: #looks to see if the triple-heads substring is contained in the string
+            tplt_count = tplt_count + 1 #keeps a count of how many strings in the list result in triple-heads. adds one each time it finds a new one
     
-    percentage = (tplt_count/df_length)
+    percentage = (tplt_count/df_length) #divides the number of triple-heads strings by the total to get a probability
     print('Your chance of flipping three heads in a row when flipping ' + str(number) + ' coins is ' + str(percentage * 100) + ' percent.')
-
+        
 def main():
     number = int(input("How many coins should I flip?"))
     coin_flip(number)
