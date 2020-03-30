@@ -18,7 +18,7 @@ file_name = "NN params.csv"
 try:    
     hyper_table = pd.read_csv(file_name)
 except FileNotFoundError:
-    hyper_table = pd.DataFrame(columns=['Hidden Layers', 'Number of nodes', 'Solver', 'Alpha', 'Test Set RMSE', 'Train Set RMSE', 'Learning Rate', 'Early Stopping'])
+    hyper_table = pd.DataFrame(columns=['Hidden Layers', 'Number of nodes', 'Solver', 'Alpha', 'Test Set RMSE', 'Train Set RMSE', 'Learning Rate', 'Early Stopping', 'Learning Rate Init', 'Activation Function'])
 
 column_names = list(pd.read_csv('https://www4.stat.ncsu.edu/~boos/var.select/diabetes.rwrite1.txt', sep=' ').columns)
 df.columns = column_names
@@ -32,22 +32,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random
 #Use Standard Scalar to normalize data
 scaler = StandardScaler()
 solvers =['lbfgs']
-learning_rates = ['constant', 'invscaling']
-early_stoppings = [True]
-first_layers = [6,7]
-second_layers = [2,3,4]
-third_layers = [0]
-alphas = [ 0.0015, 0.0017, 0.002, 0.0018]
-warm_start = True
+activation_functions = ['relu', 'tanh']
+learning_rates = ['constant']
+early_stoppings = [True, False]
+first_layers = [6]
+second_layers = [3]
+third_layers = [0,1]
+alphas = [0.0015, 0.0017, 0.002, 0.0018]
+learning_rate_inits = [0.0005, 0.001, 0.002]
 scaler.fit(X_train)
 columns = hyper_table.columns
 hyper_table = list(hyper_table.values)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
-for neurons_1, neurons_2, neurons_3, alpha, solver,learning_rate, early_stopping in product(first_layers, second_layers, third_layers, alphas, solvers, learning_rates, early_stoppings):
+for neurons_1, neurons_2, neurons_3, alpha, solver,learning_rate, early_stopping, learning_rate_init, activation_function in product(first_layers, second_layers, third_layers, alphas, solvers, learning_rates, early_stoppings, learning_rate_inits, activation_functions):
     layer_neurons = [neurons_1, neurons_2, neurons_3]
     layer_neurons = [x for x in layer_neurons if x > 0]
-    model = MLPRegressor(hidden_layer_sizes=layer_neurons, solver=solver, alpha=alpha, learning_rate=learning_rate, early_stopping = early_stopping, warm_start=warm_start, max_iter=500000).fit(X_train, y_train)
+    model = MLPRegressor(hidden_layer_sizes=layer_neurons, solver=solver, alpha=alpha, learning_rate=learning_rate, early_stopping=early_stopping, learning_rate_init=learning_rate_init, max_iter=500000).fit(X_train, y_train)
     y_test_pred = model.predict(X_test)
     y_train_pred = model.predict(X_train)
 
@@ -73,7 +74,9 @@ for neurons_1, neurons_2, neurons_3, alpha, solver,learning_rate, early_stopping
         test_rmse,
         train_rmse,
         learning_rate,
-        early_stopping]))
+        early_stopping,
+        learning_rate_init,
+        activation_function]))
     print(columns)
     print(hyper_table[-1])
 hyper_table = pd.DataFrame(hyper_table, columns=columns)
